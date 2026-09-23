@@ -22,9 +22,7 @@ USER appuser
 # Copy built jar from builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Koyeb dynamically provides $PORT (defaults to 8080)
 ENV PORT=8080
 EXPOSE 8080
 
-# Run Spring Boot
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Dserver.port=${PORT}", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
