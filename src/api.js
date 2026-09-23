@@ -2,20 +2,8 @@ import axios from "axios";
 import { localDb } from "./services/localDatabase";
 
 const getBackendUrl = () => {
-  const envUrl =
-    (typeof process !== "undefined" && process.env && (
-      process.env.VITE_API_URL ||
-      process.env.REACT_APP_API_URL ||
-      process.env.REACT_APP_API_BASE_URL
-    )) ||
-    (typeof window !== "undefined" && window.__API_URL__) ||
-    "http://localhost:8080/api";
-
-  let url = String(envUrl).trim().replace(/\/+$/, "");
-  if (!url.endsWith("/api")) {
-    url = `${url}/api`;
-  }
-  return url;
+  const url = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+  return String(url).trim().replace(/\/+$/, "");
 };
 
 const BACKEND_URL = getBackendUrl();
